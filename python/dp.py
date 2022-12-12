@@ -1,5 +1,18 @@
-# Top down - TLE
+import time
+
+n = 40
+
+
+def timeit(func):
+    start = time.time()
+    print(func(n))
+    end = time.time()
+    total_time = end - start
+    print("\n" + str(total_time))
+
+
 def climbStairs(n):
+    # Top down - TLE
     if n == 1:
         return 1
     if n == 2:
@@ -7,12 +20,11 @@ def climbStairs(n):
     return climbStairs(n-1)+climbStairs(n-2)
 
 
-print(climbStairs(10))
-
-# Bottom up, O(n) space
+timeit(climbStairs)
 
 
 def climbStairs(n):
+    # Bottom up, O(n) space
     if n == 1:
         return 1
     res = [0 for i in range(n)]
@@ -22,12 +34,11 @@ def climbStairs(n):
     return res[-1]
 
 
-print(climbStairs(10))
-
-# Bottom up, constant space
+timeit(climbStairs)
 
 
 def climbStairs(n):
+    # Bottom up, constant space
     if n == 1:
         return 1
     a, b = 1, 2
@@ -38,8 +49,7 @@ def climbStairs(n):
     return b
 
 
-print(climbStairs(10))
-# Top down + memoization (list)
+timeit(climbStairs)
 
 
 def helper(n, dic):
@@ -47,7 +57,9 @@ def helper(n, dic):
         dic[n] = helper(n-1, dic)+helper(n-2, dic)
     return dic[n]
 
+
 def climbStairs(n):
+    # Top down + memoization (list)
     if n == 1:
         return 1
     dic = [-1 for i in range(n)]
@@ -55,18 +67,13 @@ def climbStairs(n):
     return helper(n-1, dic)
 
 
-print(climbStairs(10))
-
-
-
-
-# Top down + memoization (dictionary)
-
+timeit(climbStairs)
 
 def climbStairs(n, dic={1: 1, 2: 2}):
+    # Top down + memoization (dictionary)
     if n not in dic:
         dic[n] = climbStairs(n-1) + climbStairs(n-2)
     return dic[n]
 
 
-print(climbStairs(10))
+timeit(climbStairs)
