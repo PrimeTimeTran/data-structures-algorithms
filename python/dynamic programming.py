@@ -1,12 +1,11 @@
 import time
 
-n = 40
-
+n = 100
 
 def timeit(func):
-    start = time.time()
+    start = time.perf_counter()
     print(func(n))
-    end = time.time()
+    end = time.perf_counter()
     total_time = end - start
     print("\n" + str(total_time))
 
