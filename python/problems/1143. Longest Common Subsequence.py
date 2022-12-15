@@ -17,26 +17,28 @@ class Solution:
             return max(lcs(i, j+1), lcs(i+1, j))
         return lcs(0, 0)
 
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         # Top down recursive memoization
-        # def lcs(i, j, dp={}):
-        #     if i == len(text1) or j == len(text2):
-        #         return 0
-        #     if (i, j) in dp:
-        #         return dp[(i, j)]
-        #     if text1[i] == text2[j]:
-        #         dp[(i, j)] = 1+lcs(i+1, j+1)
-        #         return dp[(i, j)]
-        #     dp[(i, j)] = max(lcs(i, j+1),lcs(i+1, j))
-        #     return dp[(i, j)]
+        def lcs(i, j, dp={}):
+            if i == len(text1) or j == len(text2):
+                return 0
+            if (i, j) in dp:
+                return dp[(i, j)]
+            if text1[i] == text2[j]:
+                dp[(i, j)] = 1+lcs(i+1, j+1)
+                return dp[(i, j)]
+            dp[(i, j)] = max(lcs(i, j+1), lcs(i+1, j))
+            return dp[(i, j)]
 
-        # return lcs(0,0)
+        return lcs(0, 0)
 
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         # Bottom up tabulation
-        # res = [[0 for  j in range(len(text2)+1)] for i in range(len(text1)+1)]
-        # for i in range(len(text1)-1,-1,-1):
-        #     for j in range(len(text2)-1,-1,-1):
-        #         if text1[i] == text2[j]:
-        #             res[i][j] = 1 + res[i+1][j+1]
-        #         else:
-        #             res[i][j] = max(res[i+1][j], res[i][j+1])
-        # return res[0][0]
+        res = [[0 for j in range(len(text2)+1)] for i in range(len(text1)+1)]
+        for i in range(len(text1)-1, -1, -1):
+            for j in range(len(text2)-1, -1, -1):
+                if text1[i] == text2[j]:
+                    res[i][j] = 1 + res[i+1][j+1]
+                else:
+                    res[i][j] = max(res[i+1][j], res[i][j+1])
+        return res[0][0]
