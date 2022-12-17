@@ -2,7 +2,6 @@ class Solution:
     # Top down brute force
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         n = len(cost)
-
         def helper(n):
             if n < 0:
                 return 0
