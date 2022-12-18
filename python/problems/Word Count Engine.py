@@ -18,33 +18,31 @@ from collections import OrderedDict
 
 
 def word_count_engine(document):
-  d = OrderedDict()
-  words = document.split()
-  max_f = 0
-  for i, word in enumerate(words):
-    realword = "".join([c.lower() for c in word if c.isalpha()])
-    d[realword] = d.get(realword, 0)+1
-    max_f = max(max_f, d[realword])
+    d = OrderedDict()
+    words = document.split()
+    max_f = 0
+    for i, word in enumerate(words):
+        realword = "".join([c.lower() for c in word if c.isalpha()])
+        d[realword] = d.get(realword, 0)+1
+        max_f = max(max_f, d[realword])
 
-  bucket = [[] for _ in range(max_f+1)]
+    bucket = [[] for _ in range(max_f+1)]
 
-  for w in d:
-    fqc = d[w]
-    bucket[fqc].append([w, str(fqc)])
+    for w in d:
+        fqc = d[w]
+        bucket[fqc].append([w, str(fqc)])
 
-  res = []
+    res = []
 
-  for i in range(len(bucket)-1, -1, -1):
-    if bucket[i]:
-      res += bucket[i]
-  return res
+    for i in range(len(bucket)-1, -1, -1):
+        if bucket[i]:
+            res += bucket[i]
+    return res
 
 
-print(word_count_engine(
-    "Practice makes perfect, you'll get perfecT by practice. just practice! just just just!!"))
-print(word_count_engine(
-    "Practice makes perfect. you'll only \
-    get Perfect by practice. just practice!") == [["practice", "3"], ["perfect", "2"],
-                                                                                                   ["makes", "1"], [
-        "youll", "1"], ["only", "1"],
-    ["get", "1"], ["by", "1"], ["just", "1"]])
+print(word_count_engine("Practice makes perfect, you'll get perfecT by practice. just practice! just just just!!") == [
+      ["just", "4"], ["practice", "3"], ["perfect", "2"], ["makes", "1"], ["youll", "1"], ["get", "1"], ["by", "1"]])
+print(word_count_engine("To be, or not to be, that is the question:") == [["to", "2"], ["be", "2"], [
+      "or", "1"], ["not", "1"], ["that", "1"], ["is", "1"], ["the", "1"], ["question", "1"]])
+print(word_count_engine("Practice makes perfect. you'll only get Perfect by practice. just practice!") == [
+      ["practice", "3"], ["perfect", "2"], ["makes", "1"], ["youll", "1"], ["only", "1"], ["get", "1"], ["by", "1"], ["just", "1"]])
