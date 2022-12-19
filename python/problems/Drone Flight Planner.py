@@ -17,13 +17,15 @@
 # Explain your solution and analyze its time and space complexities.
 
 def calc_drone_min_energy(route):
-    maxH = route[0][2]
-    for i in range(1, len(route)):
-        maxH = route[i][2]
-    return maxH - route[0][2]
+  diff = 0
+  for i in range(1, len(route)):
+    diff = max(diff, route[i][2] - route[0][2])
+  return diff
 
 
-print(calc_drone_min_energy([[0, 2, 10], [10, 10, 0]])) # 0
-print(calc_drone_min_energy([[0, 2, 6], [10, 10, 20]]))  # 14
+print(calc_drone_min_energy([[0, 1, 19]]))  # 0
 print(calc_drone_min_energy(
-    [[0, 2, 10], [10, 10, 0], [0, 0, 6], [0, 0, 15]]))  # 5
+    [[0, 2, 10], [3, 5, 0], [9, 20, 6], [10, 12, 15], [10, 10, 8]]))  # 5
+print(calc_drone_min_energy([[0, 2, 6], [10, 10, 20]]))  # 14
+print(calc_drone_min_energy([[0, 2, 2], [3, 5, 38], [
+      9, 20, 6], [10, 12, 15], [10, 10, 8]]))  # 36
