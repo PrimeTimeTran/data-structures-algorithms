@@ -30,3 +30,4 @@ def decrypt(word):
 
 
 print(decrypt('dnotq'))
+
